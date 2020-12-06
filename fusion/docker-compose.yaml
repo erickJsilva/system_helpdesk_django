@@ -1,0 +1,47 @@
+version: '3.8'
+
+services: 
+  teste-postgres-compose:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: "admin123"
+    ports:
+      - "15432:5432"
+    volumes:
+      - "/home/erick/Documentos/docker/aplicacao/fusion:/var/lib/-postgresql/data"
+    networks:
+       - rede-postgres-compose
+
+  teste-pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "erickjsilva19@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "unity3301"
+    ports:
+      - "16543:80"
+    networks: 
+      - rede-postgres-compose
+    depends_on:
+      - teste-postgres-compose
+
+  django:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    networks: 
+      - rede-postgres-compose
+    depends_on:
+      - teste-pgadmin-compose
+
+networks:
+  rede-postgres-compose:
+    driver: bridge
+
+
+
+
+
+        
