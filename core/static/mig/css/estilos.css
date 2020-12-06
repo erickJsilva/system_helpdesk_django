@@ -1,0 +1,23 @@
+body{
+    background-color: #F8F8FF;
+    color: #000000;
+}
+
+a{
+    text-decoration: nome;
+    color: #000000;
+}
+#divCenter {
+    background-color: #FFFFFF;
+    width: 400px;
+    height: 300px;
+    left: 50%;
+    margin: -130px 0 0 -210px;
+    padding:10px;
+    position: absolute;
+    top: 50%;
+    border-color: #BEBEBE;
+    border-style: solid;
+    border-radius: 5px;
+
+                }

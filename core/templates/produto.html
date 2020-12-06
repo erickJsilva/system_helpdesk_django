@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br/>
+<div class="container">
+
+ {% for p in produto %}
+
+            <div class="card" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">{{ p.produto }}</h5>
+                <p class="card-text">{{ p.descricao }}</p>
+                <a href="#" class="btn btn-primary">Comprar {{p.preco}}</a>
+              </div>
+            </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}

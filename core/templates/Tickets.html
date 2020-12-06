@@ -1,0 +1,38 @@
+{% extends 'basesup.html' %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
+<br/>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-6">
+        <div class="container">
+            <h3>Cadastro de Tickets</h3>
+            <p>
+                 É recomendado que seja cadastrado os tickets de chamado com o máximo de detalhes possível.
+               Escreva um título objetivo para que o suporte técnico possa entender sobre o que seria o problema.
+               Faça um resumo sobre o problema para que ele apareça na tela principal e por fim faça uma descrição
+               detalhada sobre o problema para que o suporte técnico possa entender todos os parâmetros.
+
+               </p>
+
+        </div>
+
+    <div class="col-md-auto">
+         {% bootstrap_messages %}
+
+            <form action="{% url 'produto' %}" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% bootstrap_form form %}
+                {% buttons %}
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                {% endbuttons %}
+            </form>
+    </div>
+  </div>
+  </div>
+
+>
+{% bootstrap_javascript jquery='full' %}
+{% endblock %}

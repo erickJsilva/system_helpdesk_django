@@ -1,0 +1,23 @@
+{% extends 'basesup.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% block content %}
+<br/>
+    {% if tickets %}
+          {% for t in tickets %}
+                <div class="card" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">{{ t.titulo }}</h5>
+                    <p class="card-text">{{ t.resumo }}</p>
+                     <h5 class="card-title">Descrição</h5>
+                      <p class="card-text">{{ t.descricao }}</p>
+                  </div>
+                </div>
+            <br/>
+          {% endfor %}
+
+        {% else %}
+            <h2>Ainda não existem produtos cadastrados. :(</h2>
+        {% endif %}
+
+{% endblock %}
