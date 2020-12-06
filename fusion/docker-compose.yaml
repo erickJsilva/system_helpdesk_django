@@ -5,8 +5,8 @@ services:
    image: mysql
    container_name: banco   
    ports:
-    - "3306:3306"
-   command: --default-authentication-plugin+mysql_native_password
+    - "3307:3306"
+   command: --default-authentication-plugin=mysql_native_password
    environment:
     MYSQL_ROOT_PASSWORD: MySQL2020
     MYSQL_DATABASE: django2
@@ -16,7 +16,7 @@ services:
     - ./data:/var/lib/mysql
     - ./site/pessoa.sql:/docker-entrypoint-initdb.d/pessoa.sql 
    networks:
-    rede-mysql-compose
+    - rede-mysql-compose
   django:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -27,7 +27,7 @@ services:
     networks: 
       - rede-mysql-compose
     depends_on:
-      - teste-pgadmin-compose
+      - banco
 
 networks:
   rede-mysql-compose:
