@@ -1,29 +1,22 @@
 version: '3.8'
 
-services: 
-  teste-postgres-compose:
-    image: postgres
-    environment:
-      POSTGRES_PASSWORD: "admin123"
-    ports:
-      - "15432:5432"
-    volumes:
-      - "/home/erick/Documentos/docker/aplicacao/fusion:/var/lib/-postgresql/data"
-    networks:
-       - rede-postgres-compose
-
-  teste-pgadmin-compose:
-    image: dpage/pgadmin4
-    environment:
-      PGADMIN_DEFAULT_EMAIL: "erickjsilva19@gmail.com"
-      PGADMIN_DEFAULT_PASSWORD: "unity3301"
-    ports:
-      - "16543:80"
-    networks: 
-      - rede-postgres-compose
-    depends_on:
-      - teste-postgres-compose
-
+services:
+  banco: 
+   image: mysql
+   container_name: banco   
+   ports:
+    - "3306:3306"
+   command: --default-authentication-plugin+mysql_native_password
+   environment:
+    MYSQL_ROOT_PASSWORD: MySQL2020
+    MYSQL_DATABASE: django2
+    MYSQL_USER: root
+    MYSQL_PASSWORD: MySQL2020
+   volumes:
+    - ./data:/var/lib/mysql
+    - ./site/pessoa.sql:/docker-entrypoint-initdb.d/pessoa.sql 
+   networks:
+    rede-mysql-compose
   django:
     build: .
     command: python manage.py runserver 0.0.0.0:8000
@@ -32,12 +25,12 @@ services:
     ports:
       - "8000:8000"
     networks: 
-      - rede-postgres-compose
+      - rede-mysql-compose
     depends_on:
       - teste-pgadmin-compose
 
 networks:
-  rede-postgres-compose:
+  rede-mysql-compose:
     driver: bridge
 
 
